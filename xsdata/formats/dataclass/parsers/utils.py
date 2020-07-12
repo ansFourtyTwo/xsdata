@@ -196,7 +196,7 @@ class ParserUtils:
 
         def qname(value: Any) -> Any:
             prefix, suffix = text.split(value)
-            if prefix and prefix in element.nsmap:
+            if prefix and prefix in element.nsmap and not suffix.startswith("//"):
                 return QName(element.nsmap[prefix], suffix)
             return value
 
@@ -207,7 +207,7 @@ class ParserUtils:
         """Add the given element's text content if any to the params dictionary
         with the text var name as key."""
         var = metadata.find_var(mode=FindMode.TEXT)
-        if var and element.text is not None and var.init:
+        if var and element.text is not None and len(element) == 0 and var.init:
             params[var.name] = cls.parse_value(
                 var.types, element.text, var.default, element.nsmap, var.is_tokens
             )
