@@ -25,7 +25,6 @@ class AttributeImpliedHandler(HandlerInterface):
         attr = Attr(
             name="content",
             local_name="content",
-            index=0,
             types=[
                 AttrType(
                     qname=QName(Namespace.XS.uri, DataType.ANY_TYPE.code), native=True,
